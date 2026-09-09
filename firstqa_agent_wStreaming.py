@@ -1,54 +1,93 @@
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain_core.messages.tool import tool_call
 from langchain.tools import tool
 from langchain.chat_models import init_chat_model
-
-from firstqa_agent import my_agent
 
 # Load environment variables from .env
 load_dotenv()
 
+
 @tool
 def check_jira_for_login_defects():
-    """This tool checks Jira for any open defects related to login functionality."""
-    # This function would contain logic to check Jira for any existing defects related to login functionality.
-    # For demonstration purposes, we'll return a placeholder string.
-    return "Checked Jira for login defects. Found 1 high priority defect (nothing happens when the user clicks the login button)."
+    """
+    Check Jira for open defects related to login functionality.
+    """
+    # Placeholder until Jira is actually integrated
+    return "Checked Jira for login defects. Found 1 high priority defects."
+
 
 llm_model = init_chat_model(
     model="gpt-5-nano",
-    temperature = 0.7, #this is to determine the randomness of the model's responses. A lower temperature (closer to 0) will make the model's responses more deterministic and focused, while a higher temperature (closer to 1) will make the responses more random and creative.
-    timeout=600, #this is in seconds and it is to set the maximum time the model will take to respond. If the model takes longer than this time, it will raise a timeout error.
-    max_tokens = 30000, #this is to limit the maximum number of tokens the model can generate in a single response. This helps to control the length of the output and manage costs associated with token usage.
-    max_retries = 3, #this is to set the maximum number of times the model will retry generating a response if it encounters an error or fails to generate a response. This helps to improve reliability in case of transient issues.
-    streaming=True, #this is to enable streaming of the model's responses. When set to True, the model will send partial responses as they are generated, allowing for a more interactive experience. If set to False, the model will wait until the entire response is generated before sending it back.
+    temperature=0.5,
+    timeout=600,
+    max_tokens=30000,
+    max_retries=3,
 )
 
 
 my_agent = create_agent(
     model=llm_model,
-    #the purpose of a system prompt is to set the behavior and context for the agent. It defines the role, expertise, and tone of the agent, guiding how it should respond to user queries. In this case, it establishes the agent as an expert in QA (Quality Assurance) AI engineering, ensuring that its responses are relevant and informed by that expertise.
-    system_prompt="You are an expert QA AI Engineer.  You are a Lead Test Automation Engineer. Do not provide the groovy scripts. ", # You use Katalon with groovy as your scripting language. You have Insurance and Annuity Business Domain Knowlede",
-    tools=[check_jira_for_login_defects]
+    tools=[check_jira_for_login_defects],
+
+    system_prompt="""
+You are a Lead Quality Assurance (QA) Automation and Test Engineer
+with 15+ years of experience across manual, automated, performance,
+API, data integration, and security testing.
+
+Your objective is to provide precise, practical, and technically
+accurate QA guidance.
+
+Execution Guidelines:
+
+1. Scope
+Only answer questions related to software engineering, quality assurance,
+testing methodologies, test automation, CI/CD, defect management,
+and AI Quality Engineering.
+
+2. Tone
+Be professional, analytical, concise, and objective.
+
+3. Test Automation
+Do not assume or select a specific commercial test automation product
+unless the user explicitly requests one.
+
+Do not generate Katalon scripts unless the user specifically asks
+for Katalon.
+
+When automation code is appropriate, prefer generic Python examples
+unless another language or framework is explicitly requested.
+
+4. Test Cases
+When creating a test case, include:
+- Test Case ID
+- Objective
+- Preconditions
+- Test Data
+- Test Steps
+- Expected Result
+
+5. Defects
+When asked about Jira defects, use the available Jira tool before
+answering. Base the answer only on the tool result.
+
+Do not invent defects that were not returned by the tool.
+"""
 )
 
+
 user_msg = {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Are there any open defect in jira? if yes, write a test case for it."
-            }
-        ]
-    }
+    "messages": [
+        {
+            "role": "user",
+            "content": "Are there any open defects in Jira? If yes, write a test case for it."
+        }
+    ]
+}
 
 
-results = my_agent.stream(user_msg)
-
-for chunk, metadata in my_agent.stream(user_msg,stream_mode="messages"):
-    print(chunk.content, end="", flush=True) #the purpose of this line is to print the content of each chunk of the streamed response from the agent in real-time. The end="" argument ensures that the output is printed on the same line without adding a newline after each chunk, and flush=True forces the output to be written to the console immediately, providing a live streaming effect.
-
-
-#print(result)
-#print(result["messages"][-1].content_blocks)
-#print(result["messages"][-1].content)
+for chunk, metadata in my_agent.stream(
+    user_msg,
+    stream_mode="messages"
+):
+    if chunk.content:
+        print(chunk.content, end="", flush=True)
