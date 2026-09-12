@@ -1,4 +1,8 @@
 from langchain.agents import create_agent
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
 
 def get_weather(city: str) -> str:
     """Get weather for a given city."""
@@ -11,6 +15,6 @@ agent = create_agent(
 )
 
 result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What's the weather in San Francisco?"}]}
+    {"messages": [{"role": "user", "content": "What's the weather in London, England?"}]}
 )
 print(result["messages"][-1].content_blocks)
