@@ -1,0 +1,56 @@
+
+Master LangChain to automate testing workflows. Build RAG, Agentic RAG & Agent Chat UI systems for QA/SDET Professionals
+https://www.udemy.com/course/langchain-qa-build-ai-agents-rag-systems-chatbots/learn/lecture/57224139?start=0#overview
+
+for uv use "uv add <package_name>" to add packages to the uv project.
+
+
+1. uv --version
+   Confirm the version of uv installed on your system.
+
+2. uv init
+   Initialize the uv project.
+   This creates the pyproject.toml project structure.
+
+3. uv run python --version
+   Confirm the Python version being used by the uv project.
+
+4. uv add langchain langchain-openai
+   Add LangChain and the OpenAI integration to the uv project.
+   NOTE: We may need to also install gemini-langchain if we want to use Gemini with LangChain.
+
+5. uv run python -c "import langchain; print(langchain.__version__)"
+   Confirm the installed LangChain version.
+
+6. uv run python -c "from langchain_openai import ChatOpenAI; print('langchain-openai installed successfully')"
+   Confirm that the LangChain OpenAI integration is installed correctly.
+
+7. uv sync
+    Synchronize the uv project dependencies and ensure everything is up to date.
+
+8. uv add python-dotenv
+   Add the python-dotenv package to manage environment variables.
+
+9. uv run python -c "import dotenv; print(dotenv.__version__)"
+   Confirm the installed python-dotenv version.
+
+10. uv add pydantic
+    Add the pydantic package for data validation and settings management
+
+11. uv add openai
+    Add the OpenAI package to the uv project.
+
+12. in your program configure the model.
+    example: https://docs.langchain.com/oss/python/langchain/quickstart
+    from langchain.chat_models import init_chat_model
+
+    model = init_chat_model(
+        "openai:gpt-5.5",
+        temperature=0.5,
+        timeout=300,
+        max_tokens=25000,
+        )
+
+13.  Install deepeval package
+    uv add deepeval
+
