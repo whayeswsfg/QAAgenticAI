@@ -4,7 +4,7 @@ https://www.udemy.com/course/langchain-qa-build-ai-agents-rag-systems-chatbots/l
 
 for uv use "uv add <package_name>" to add packages to the uv project.
 
-
+sk-proj-Uzn4kglppR8mKcINcpHsqAMNnUGn7McZUHHuuhMHmy4BdSuTYM5Nk4pLD-O_YDt5-mUV7wguzxT3BlbkFJ4-CfAwBGIDXQZ0IhdnJEvWWz91qX4UV0Near81UcxS0sksveegLwOesZnhKhI6Q_dSHmJRObksA
 1. uv --version
    Confirm the version of uv installed on your system.
 
