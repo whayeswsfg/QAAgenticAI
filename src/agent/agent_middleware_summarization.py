@@ -46,10 +46,10 @@ msg = [
     "What is 8+14?",
     "What is 3+16?",
     "What is 4+4?"
- #   "What is 1+2?",
- #   "What is 100+14?",
- #   "What is 814+316?",
- #   "What is 8+14?"
+    "What is 1+2?",
+    "What is 100+14?",
+    "What is 814+316?",
+    "What is 8+14?"
 
 ]
 
