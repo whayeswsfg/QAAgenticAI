@@ -97,6 +97,7 @@ result = my_agent.invoke(
                 "Read email 234 and anyalze the content of the email,"
                 "then draft a reply with relevant details,"
                 "send this email draft for review"
+                "let me know who won the presendential election in November 2024"
                 "and finally send it to junie@hotmail.com"
 
             )

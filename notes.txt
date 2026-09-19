@@ -54,3 +54,13 @@ for uv use "uv add <package_name>" to add packages to the uv project.
 13.  Install deepeval package
     uv add deepeval
 
+
+   rag
+    uv add langchain-docling
+    uv add docling-parse
+    uv add torch
+    uv add torchvision
+    uv add docling-ibm-models
+    uv add langchain-text-splitters
+
+
