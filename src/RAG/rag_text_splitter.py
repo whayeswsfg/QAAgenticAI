@@ -17,7 +17,7 @@ document= ragdoc.load()
 
 #print(document)
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=20)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=400, chunk_overlap=20)
 doc_splits = text_splitter.split_documents(document)
 #print("The content of first split is: ", doc_splits[0])
 
@@ -38,9 +38,11 @@ vector_store.add_documents(doc_splits)
 #for doc in results:
 #    print(doc.page_content)
 
-retriever = vector_store.as_retriever(
-    search_type = "mmr",
-    research_kwargs={"k":2}
+myretriever = vector_store.as_retriever(
+    search_type = "mmr", #mmr means maximal marginal relevance; balance simularity# of docs to return; with diversity among the selected results
+    research_kwargs={"k":1}  #restrict output to 2 documents; fetch_k = amount of doucments to pass to MMR algorithm
 )
 
-retriever.invoke("What is the mandatory training for week 1")
+results=myretriever.invoke("What is the mandatory training for week 2")
+for doc in results:
+    print(doc.page_content)
