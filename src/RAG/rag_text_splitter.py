@@ -42,6 +42,7 @@ myretriever = vector_store.as_retriever(
     research_kwargs={"k":1}  #restrict output to 2 documents; fetch_k = amount of doucments to pass to MMR algorithm
 )
 
-results=myretriever.invoke("What is the mandatory training for week 2")
+#for failure #results=myretriever.invoke("What is the mandatory training for week 2")
+results=myretriever.invoke("What are the common Quality Principles")
 for doc in results:
     print(doc.page_content)
