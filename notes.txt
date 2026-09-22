@@ -63,6 +63,6 @@ for uv use "uv add <package_name>" to add packages to the uv project.
     uv add docling-ibm-models
     uv add langchain-text-splitters
 
-
+https://www.udemy.com/course/langchain-qa-build-ai-agents-rag-systems-chatbots/learn/lecture/57622641#overview
 
 
