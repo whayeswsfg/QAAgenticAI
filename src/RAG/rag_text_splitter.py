@@ -8,8 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 #where the files are
-#FILE_PATH = "C:\\Users\\hayes\\Documents\\whragpdffolder\\RAGPDF\\samplereq.pdf"
-FILE_PATH = "C:\\Users\\hayes\\Documents\\whragpdffolder\\RAGPDF\\RCV_Academy_Onboarding.docx"
+FILE_PATH = r"src\RequirementDoc\AI_Solution_Requirements.docx"
 
 ragdoc = (DoclingLoader(file_path=FILE_PATH))
 
